@@ -8,9 +8,11 @@ var zipCode = url.searchParams.get("zip");
 (async () => {
     async function setZip(postalCode) {
         var locationData = await axios.get(`https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=${postalCode}&key=17o8dysaCDrgv1c`);
+        var coordinates;
 
         if (locationData.data && locationData.data.output) {
-            window.location = `/?c=${locationData.data.output.latitude},${locationData.data.output.longitude}`
+            coordinates = locationData.data.output[0]
+            window.location = `/?c=${coordinates.latitude},${coordinates.longitude}`
         }
     }
 
