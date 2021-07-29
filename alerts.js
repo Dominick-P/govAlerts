@@ -13,7 +13,7 @@ var zipDisplay = url.searchParams.get("zipDisplay");
 
         if (locationData.data && locationData.data.output) {
             coordinates = locationData.data.output[0]
-            window.location = `/?c=${coordinates.latitude},${coordinates.longitude}`
+            window.location = `/?c=${coordinates.latitude},${coordinates.longitude}&zipDisplay=${postalCode}`
         }
     }
 
