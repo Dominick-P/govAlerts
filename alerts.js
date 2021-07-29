@@ -3,6 +3,24 @@ var alertTemplate = $("#alertTemplate");
 var alertsSpinner = $("#alertsSpinner");
 var url = new URL(window.location.href);
 var geoLocation = url.searchParams.get("c");
+var zipCode = url.searchParams.get("zip");
+
+function setZip(postalCode) {
+    var locationData = await axios.get(`https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=${postalCode}&key=17o8dysaCDrgv1c`);
+
+    if (locationData.data && locationData.data.output) {
+        window.location = `/alerts?c=${locationData.data.output.latitude},${locationData.data.output.longitude}`
+    }
+}
+
+$("#submitPostal").on("click", function () {
+    setZip($("#inputPostal").val());
+});
+
+if (zipCode) {
+    setZip(postalCode);
+    $("#inputPostal").val(postalCode);
+}
 
 (async () => {
     if (!geoLocation) {
