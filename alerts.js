@@ -4,6 +4,7 @@ var alertsSpinner = $("#alertsSpinner");
 var url = new URL(window.location.href);
 var geoLocation = url.searchParams.get("c");
 var zipCode = url.searchParams.get("zip");
+var zipDisplay = url.searchParams.get("zipDisplay");
 
 (async () => {
     async function setZip(postalCode) {
@@ -22,7 +23,11 @@ var zipCode = url.searchParams.get("zip");
 
     if (zipCode) {
         setZip(postalCode);
-        $("#inputPostal").val(postalCode);
+    }
+
+    if (zipDisplay) {
+        $("#mainTitle").text(zipDisplay + " Weather Alerts")
+        $("#inputPostal").val(zipDisplay);
     }
 
     if (!geoLocation) {
