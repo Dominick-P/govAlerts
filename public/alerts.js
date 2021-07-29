@@ -4,8 +4,15 @@ var alertsSpinner = $("#alertsSpinner");
 var url = new URL(window.location.href);
 var geoLocation = url.searchParams.get("c");
 
-(() => {
-    if (!geoLocation) return;
+(async () => {
+    if (!geoLocation) {
+        var locationData = await axios.get("http://ip-api.com/json/");
+
+        if (locationData.data) {
+            geoLocation = locationData.data.lat + "," + locationData.data.lon;
+            $("#mainTitle").text(locationData.data.city + " Weather Alerts")
+        }
+    }
 
     geoLocation = geoLocation.split(",");
 
@@ -23,6 +30,10 @@ var geoLocation = url.searchParams.get("c");
         var count = 0
 
         alertsSpinner.remove();
+
+        if (data.features.length == 0) {
+            $("#noAlerts").attr("style", "");
+        }
 
         data.features.forEach(alert => {
             var template = alertTemplate.clone();
