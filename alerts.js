@@ -6,7 +6,7 @@ var geoLocation = url.searchParams.get("c");
 var zipCode = url.searchParams.get("zip");
 
 (async () => {
-    function setZip(postalCode) {
+    async function setZip(postalCode) {
         var locationData = await axios.get(`https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=${postalCode}&key=17o8dysaCDrgv1c`);
 
         if (locationData.data && locationData.data.output) {
