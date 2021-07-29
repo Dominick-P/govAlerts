@@ -6,10 +6,10 @@ var geoLocation = url.searchParams.get("c");
 
 (async () => {
     if (!geoLocation) {
-        var locationData = await axios.get("http://ip-api.com/json/");
+        var locationData = await axios.get("https://ipapi.co/json/");
 
         if (locationData.data) {
-            geoLocation = locationData.data.lat + "," + locationData.data.lon;
+            geoLocation = locationData.data.latitude + "," + locationData.data.longitude;
             $("#mainTitle").text(locationData.data.city + " Weather Alerts")
         }
     }
