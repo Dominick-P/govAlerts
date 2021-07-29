@@ -10,7 +10,7 @@ var zipCode = url.searchParams.get("zip");
         var locationData = await axios.get(`https://api.promaptools.com/service/us/zip-lat-lng/get/?zip=${postalCode}&key=17o8dysaCDrgv1c`);
 
         if (locationData.data && locationData.data.output) {
-            window.location = `/alerts?c=${locationData.data.output.latitude},${locationData.data.output.longitude}`
+            window.location = `/?c=${locationData.data.output.latitude},${locationData.data.output.longitude}`
         }
     }
 
